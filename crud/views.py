@@ -3,7 +3,7 @@ from django.db import connections
 from django.shortcuts import render
 from django.http import JsonResponse,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.template import loader
 
 
 #views
@@ -65,3 +65,7 @@ def content(request):
     cursor.execute(query)
     res=cursor.fetchall()
     return JsonResponse({"contents":res})
+
+def home(request):
+    template=loader.get_template('index.html')
+    return HttpResponse(template.render())
